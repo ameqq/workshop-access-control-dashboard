@@ -9,7 +9,8 @@ export default function Dashboard() {
   });
 
   const API_URL =
-    "https://script.google.com/macros/s/AKfycbxDichOfL61qYxvLSRAbyJjLaqyL3eoRSnUYwuwKD0VgJj-0Gxp8ebgFZqD05sKVM34Iw/exec";
+     "https://script.google.com/macros/s/AKfycbz77Xz2_iqDn8oUFeA9Lze-QqkOYju0nqwi9wJLYGtVxj7RpbznruTGgNjp2HkWNLjvPA/exec";
+";
 
   useEffect(() => {
     const fetchData = () => {

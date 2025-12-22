@@ -6,7 +6,7 @@ export default function Logs() {
 
   useEffect(() => {
     fetch(
-      "https://script.google.com/macros/s/AKfycbznqkrJ1R3AX3lr77Xs18JxqTQPysQHvQsZhUKwsseLpTRWMoSibUm-wid1-1VLNdIIQA/exec?type=logs"
+      "https://script.google.com/macros/s/AKfycbz77Xz2_iqDn8oUFeA9Lze-QqkOYju0nqwi9wJLYGtVxj7RpbznruTGgNjp2HkWNLjvPA/exec"
     )
       .then((res) => res.json())
       .then((data) => setLogs(data))
