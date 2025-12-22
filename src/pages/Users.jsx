@@ -1,31 +1,27 @@
 import { useState } from "react";
 
-const API_URL = "https://script.google.com/macros/s/AKfycbxAMR_XgAS4cqfejEHR4WyRW4WX0HBqX8Xqw50zb9LHMxEOlsFGmH1QNcEh2K11Oyqrbw/exec";
+const ADMIN_API =
+  "https://script.google.com/macros/s/AKfycbxAMR_XgAS4cqfejEHR4WyRW4WX0HBqX8Xqw50zb9LHMxE0IsFGmH1ONcEh2K11Oyqrbw/exec";
 
 export default function Users() {
   const [password, setPassword] = useState("");
   const [unlocked, setUnlocked] = useState(false);
   const [error, setError] = useState("");
 
-  const unlock = async () => {
+  const unlockAdmin = async () => {
     setError("");
 
     try {
-      const res = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          type: "admin_login",
-          password: password
-        })
-      });
+      const res = await fetch(
+        `${ADMIN_API}?type=admin_login&password=${encodeURIComponent(password)}`
+      );
 
       const data = await res.json();
 
-      if (data.success) {
+      if (data.success === true) {
         setUnlocked(true);
       } else {
-        setError("Wrong admin password");
+        setError("Invalid password");
       }
     } catch (err) {
       setError("Server error");
@@ -35,22 +31,22 @@ export default function Users() {
   if (!unlocked) {
     return (
       <div className="flex items-center justify-center h-full">
-        <div className="bg-white shadow p-6 rounded w-80">
+        <div className="bg-white p-6 rounded shadow w-96 text-center">
           <h2 className="text-xl font-bold mb-4">Admin Access Required</h2>
 
           <input
             type="password"
-            className="border w-full p-2 mb-3"
+            className="border p-2 w-full mb-2"
             placeholder="Enter admin password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          {error && <p className="text-red-600 mb-2">{error}</p>}
+          {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
 
           <button
-            onClick={unlock}
-            className="bg-red-600 text-white px-4 py-2 w-full rounded"
+            onClick={unlockAdmin}
+            className="bg-red-600 text-white px-4 py-2 rounded w-full"
           >
             Unlock User Management
           </button>
@@ -59,11 +55,15 @@ export default function Users() {
     );
   }
 
-  // ===== USER MANAGEMENT CONTENT =====
+  // ================= AFTER UNLOCK =================
   return (
-    <div>
+    <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">User Management</h1>
-      <p>Admin unlocked. User management panel here.</p>
+      <p className="text-green-600 font-semibold">
+        Admin access granted ✅
+      </p>
+
+      {/* USER TABLE NANTI KITA SAMBUNG */}
     </div>
   );
 }
