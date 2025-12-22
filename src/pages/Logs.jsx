@@ -6,10 +6,17 @@ export default function Logs() {
 
   useEffect(() => {
     fetch(
-      "https://script.google.com/macros/s/AKfycbz77Xz2_iqDn8oUFeA9Lze-QqkOYju0nqwi9wJLYGtVxj7RpbznruTGgNjp2HkWNLjvPA/exec"
+      "https://script.google.com/macros/s/AKfycbz77Xz2_iqDn8oUFeA9Lze-QqkOYju0nqwi9wJLYGtVxj7RpbznruTGgNjp2HkWNLjvPA/exec?type=logs"
     )
       .then((res) => res.json())
-      .then((data) => setLogs(data))
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setLogs(data);
+        } else {
+          setLogs([]);
+          console.error("Invalid logs data:", data);
+        }
+      })
       .catch((err) => console.error(err));
   }, []);
 
@@ -31,7 +38,9 @@ export default function Logs() {
           <tbody>
             {logs.map((log, i) => (
               <tr key={i} className="border-t">
-                <td className="p-3">{new Date(log.timestamp).toLocaleString()}</td>
+                <td className="p-3">
+                  {new Date(log.timestamp).toLocaleString()}
+                </td>
                 <td className="p-3">{log.student_id}</td>
                 <td className="p-3">{log.name}</td>
                 <td
