@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const ADMIN_API =
-  "https://script.google.com/macros/s/AKfycbxAMR_XgAS4cqfejEHR4WyRW4WX0HBqX8Xqw50zb9LHMxE0IsFGmH1ONcEh2K11Oyqrbw/exec";
+  "https://script.google.com/macros/s/AKfycbz77Xz2_iqDn8oUFeA9Lze-QqkOYju0nqwi9wJLYGtVxj7RpbznruTGgNjp2HkWNLjvPA/exec";
 
 export default function Users() {
   const [password, setPassword] = useState("");
